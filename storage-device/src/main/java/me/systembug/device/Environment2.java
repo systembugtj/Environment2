@@ -19,10 +19,10 @@ import me.systembug.device.pref.DevicesListPreference;
 
 /**
  * 
- * Hilfsklasse mit mehreren Funktionsbl?cken, die auf die Problematik eingehen, 
- * dass viele moderne Android-Ger?te technisch zwei SD-Karten haben: 
+ * Auxiliary class with several function blocks that deal with the problem,
+ * That many modern Android devices have technically two SD cards:
  * <ul>
- * <li>Der "alte" Speicher, den Android als "External Memory" oder unter 
+ * <li>The "old" memory, the Android as "external memory" or under
  * "mnt/sdcard" anspricht, ist dabei fest eingebaut; er hat zwar "sd" im Namen
  * und wird ?ber Methoden mit "external" im Namen angesprochen, aber
  * das stimmt ansich nicht: Dieser Speicher ist nicht wechselbar und technisch
@@ -187,10 +187,10 @@ public class Environment2  {
 
 
 	/**
-	 * Fragt ab, ob die Zweit-SD vorhanden ist. Der genauere Status kann 
-	 * danach per {@link #getSecondaryExternalStorageState()} abgefragt werden.
-	 * @return true, wenn eine Zweit-SD vorhanden und eingelegt ist, 
-	 * 		false wenn nicht eingelegt oder kein Slot vorhanden
+	 * Ask if the second SD is present. The more accurate status can be
+	 * Then be queried using {@link #getSecondaryExternalStorageState ()}.
+	 * @return true, When a second SD is present and inserted,
+	 *			false if not inserted or no slot present
 	 */
 	public static boolean isSecondaryExternalStorageAvailable() {
 		return mSecondary!=null && mSecondary.isAvailable();
@@ -198,10 +198,10 @@ public class Environment2  {
 
 	
 	/**
-	 * Zeigt an, ob die Zweit-SD entfernt werden kann; derzeit kenne ich kein 
-	 * Ger?t, bei dem die fest eingebaut w?re, also immer true
+	 * Indicates whether the second SD can be removed; Currently I know none
+	 * Device, where the fixed were, so always true
 	 * @return true
-	 * @throws NoSecondaryStorageException falls keine Zwei-SD vorhanden
+	 * @throws NoSecondaryStorageException If no two-SD is present
 	 * @see #isSecondaryExternalStorageAvailable()
 	 */
 	public final static boolean isSecondaryExternalStorageRemovable() throws NoSecondaryStorageException {
@@ -211,7 +211,7 @@ public class Environment2  {
 	
 	
 	/**
-	 * Ein Zeiger auf die Zweit-SD, falls gefunden
+	 * A pointer to the second SD, if found
 	 * @return das Verzeichnis der Zwei-SD
 	 * @throws NoSecondaryStorageException wenn keine Zwei-SD vorhanden oder nicht eingelegt
 	 * @see #isSecondaryExternalStorageAvailable()
@@ -223,15 +223,13 @@ public class Environment2  {
 
 	
 	/**
-	 * Liefert den Status einer zweiten SD-Karte oder wirt eine Exception
+	 * Returns the status of a second SD card or throws an exception
+	 * <p> A permission is required to write to the card:
+	 * 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	 * <p>
-	* Zum Schreiben auf die Karte ist eine Permission notwendig:
-	* <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	*	<p> 
-	* TODO ab JellyBean 4.1 soll es auch eine Read-Permission geben?!
-	 * @return einer von den drei in Environment definierten States 
+	 * @return One of the three states defined in Environment
 	 * 	MEDIA_MOUNTED, _MOUNTED_READ_ONLY und _REMOVED
-	 * @throws NoSecondaryStorageException wenn kein zweiter SD-Slot vorhanden
+	 * @throws NoSecondaryStorageException If there is no second SD slot
 	 * 
 	 * @see #isSecondaryExternalStorageAvailable()
 	 */
@@ -242,12 +240,11 @@ public class Environment2  {
 
 	
 	/**
-	 * Gibt die Public-Directories auf der Zweit-SD zur?ck; legt 
+	 * Returns the public directories on the second SD, if used
 	 * sie (wie die Environment-Methode) nicht an.
-	 * @param s ein String aus Environment.DIRECTORY_xxx, 
-	 * darf nicht null sein. (Funktioniert auch mit anderen Pfadnamen 
-	 * und mit verschachtelten)
-	 * @return ein File dieses Verzeichnisses. Wenn Schreibzugriff gew?hrt, 
+	 * @param s A string from Environment.DIRECTORY_xxx,
+	 * 			Can not be null. (Also works with other path names and with nested ones)
+	 * @return ein File dieses Verzeichnisses. Wenn Schreibzugriff gew?hrt,
 	 * wird es angelegt, falls nicht vorhanden
 	 * @throws NoSecondaryStorageException falls keine Zweit-SD vorhanden
 	 */
@@ -259,15 +256,14 @@ public class Environment2  {
 	
 	
 	/**
-	 * Nachbau der Context-Methode getExternalFilesDir(String) mit zwei Unterschieden:
+	 * Reconstruction of the context method getExternalFilesDir (String) with two differences:
 	 * <ol>
-	 * <li>man muss halt Context ?bergeben
-	 * <li>das Verzeichnis wird bei der App-Deinstallation nicht gel?scht
+	 * <li>You have to stop Context
+	 * <li>The directory is not deleted during app uninstallation
 	 * </ol>
-	 * @param context der Context der App; ben?tigt, um den Pfadnamen auszulesen
-	 * @param s ein String aus Environment.DIRECTORY_xxx, kann aber auch 
-	 * 		ein anderer (verschachtelter) sein oder null
-	 * @return das Verzeichnis. Wird angelegt, wenn man Schreibzugriff hat
+	 * @param context The context of the app; To read the path name
+	 * @param s A string from Environment.DIRECTORY_xxx, but can be another (nested) or null
+	 * @return the directory. Is created if you have write access
 	 * @throws NoSecondaryStorageException falls keine Zwei-SD vorhanden
 	 */
 	public static File getSecondaryExternalFilesDir(Context context, String s) throws NoSecondaryStorageException {
@@ -586,9 +582,8 @@ public class Environment2  {
         				mDeviceList.add(d);
         			
         		} else if (prefixScan) {
-        			// Weitere Untersuchungen nur, wenn noch vor sdcard-Eintrag
-        			// etwas unsauber, da es eigentlich in {} vorkommen muss, was ich hier nicht ?berpr?fe
-        			
+					// Further investigations only if before sdcard entry
+					// something unclean, since it must actually occur in {}, which I am not checking here
         			if ("discard".equals(f)) {
         				// manche (Galaxy Note) schreiben "discard=disable" vor den sdcard-Eintrag.
         				sp.next(); // "="
@@ -597,9 +592,9 @@ public class Environment2  {
         					mPrimary.setRemovable(false);
         					Log.w(TAG, "isExternStorageRemovable overwrite ('discard=disable') auf false");
         				} else if ("enable".equals(f)) {
-        					// ha, denkste...  bisher habe ich den Eintrag nur bei zwei Handys gefunden, (Galaxy Note, Galaxy Mini 2), und
-        					// da stimmte er *nicht*, sondern die Karten waren nicht herausnehmbar.
-        					// mPrimary.mRemovable = true;
+							// ha, denkste ... so far I have found the entry only with two mobile phones, (Galaxy Note, Galaxy Mini 2), and
+							// he did not vote *, but the cards were not removable.
+							// mPrimary.mRemovable = true;
         					Log.w(TAG, "isExternStorageRemovable overwrite overwrite ('discard=enable'), bleibt auf "+mPrimary.isRemovable());
         				} else
         					Log.w(TAG, "disable-Eintrag unverst?ndlich: "+f);
@@ -619,21 +614,19 @@ public class Environment2  {
 	
 
 	/**
-	 * Liste aller gefundener Removable-Ger?te zusammenstellen. Die Liste kann 
-	 * nach Device-Namen und weiteren Parametern eingeschr?nkt werden.
+	 * List of all found Removable devices. The list can be restricted by device name and other parameters.
 	 * 
-	 * @param key ein String zum Einschr?nken der Liste. Findet nur die Devices 
-	 * 		mit dem String in getName() oder alle, falls null.
-	 * @param available ein Boolean zum Beschr?nken der Liste auf vorhandene
-	 * 		(eingesteckte) Ger?te. false findet alle, true nur diejenigen, die eingesteckt sind.
-	 * 		Wenn false, k?nnen Device-Eintr?ge zur?ckgegeben werden, deren
-	 * 		getSize()-Objekt null ist.
-	 * @param intern ein Boolean, der bestimmt, ob der interne Speicher (/mnt/sdcard)
-	 * 		mit in die Liste ?bernommen wird (unter Ber?cksichtigung von available,
-	 * 		aber nicht key).
-	 * @param data ein Boolean, der bestimmt, ob der data-Speicher (/data) mit
-	 * 		in die Liste ?bernommen wird
-	 * @return ein Array mit allen {@link Device}, die den Suchkriterien entsprechen
+	 * @param key A string for restricting the list. Finds only the devices
+	 * 			With the string in getName () or all, if null.
+	 * @param available A boolean to restrict the list to existing ones
+	 * 			(Plugged in) devices. False finds all, true only those that are plugged in.
+	 * 			If false, device entries can be returned whose
+	 * 			GetSize () object is null.
+	 * @param intern A boolean that determines whether the internal memory (/ mnt / sdcard)
+	 * 			Is included in the list (taking into account available, But not key).
+	 * @param data a boolean that determines whether the data store (/ data) with
+	 * 				Is added to the list
+	 * @return an array containing all {@linkDevice} that match the search criteria
 	 */
 	public static Device[] getDevices(String key, boolean available, boolean intern, boolean data) {
 		if (key!=null) key = key.toLowerCase();

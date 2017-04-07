@@ -8,6 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.systembug.storage.MainActivity">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <TextView android:layout_width="wrap_content"
+        android:id="@+id/information"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
